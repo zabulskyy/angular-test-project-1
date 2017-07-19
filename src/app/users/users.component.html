@@ -1,0 +1,22 @@
+<h1>Users</h1>
+<button class="btn btn-primary" routerLink="new">Add user</button>
+<hr>
+<table class="table table-bordered">
+  <thead>
+  <tr>
+    <td>Name</td>
+    <td>Email</td>
+    <td>Edit</td>
+    <td>Delete</td>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of users">
+    <td>{{user.name}}</td>
+    <td>{{user.email}}</td>
+    <td>&#9998;</td>
+    <td>&#10008;</td>
+  </tr>
+  </tbody>
+</table>
+<span *ngIf="isLoading">Wait for loading data...</span>
