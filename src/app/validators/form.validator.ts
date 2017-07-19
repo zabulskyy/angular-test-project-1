@@ -1,4 +1,4 @@
-import {FormControl, NgControl} from "@angular/forms";
+import {FormControl} from "@angular/forms";
 
 export class EmailValidators {
   static mustHaveDoteAndAtSymbol(control: FormControl) {
