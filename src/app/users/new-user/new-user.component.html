@@ -2,17 +2,19 @@
 <hr>
 <div class="col-md-6 well">
   <form
-    [formGroup]="form"
+    #form='ngForm'
     action="">
     <fieldset>
       <legend>User</legend>
       <div class="form-group">
         <label for="name">Name</label>
         <input
-          formControlName="name"
           class="form-control"
           id="name"
-          type="text">
+          type="text"
+          [(ngModel)]="form.controls['name'].value"
+          name="name"
+          #name="ngModel">
         <div *ngIf="form.controls['name'].touched && form.controls['name'].errors">
           <div
             *ngIf="form.controls['name'].errors['required']"
@@ -32,7 +34,8 @@
           formControlName="email"
           class="form-control"
           id="email"
-          type="text">
+          type="text"
+          [(ngModel)]="form.controls['email'].value">
         <div *ngIf="form.controls['email'].touched && form.controls['email'].errors">
           <div
             *ngIf="form.controls['email'].errors['required']"
@@ -52,12 +55,18 @@
           formControlName="phone"
           class="form-control"
           id="phone"
-          type="text">
+          type="text"
+          [(ngModel)]="form.controls['phone'].value">
         <div *ngIf="form.controls['phone'].touched && form.controls['phone'].errors">
           <div
             *ngIf="form.controls['phone'].errors['required']"
             class="alert alert-danger">
             Phone is required
+          </div>
+          <div
+            *ngIf="form.controls['phone'].errors['invalidNumber']"
+            class="alert alert-danger">
+            Phone is invalid
           </div>
         </div>
       </div>
@@ -81,6 +90,7 @@
         <input class="form-control" id="zipCode" type="text">
       </div>
     </fieldset>
-    <button class="btn btn-primary" type="submit">Save</button>
+    <button [disabled]="!form.valid" class="btn btn-primary" type="submit">Save</button>
   </form>
 </div>
+<button class="btn btn-danger" (click)="showUser()">Show User</button>

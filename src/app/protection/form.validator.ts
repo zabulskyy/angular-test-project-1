@@ -9,8 +9,8 @@ export class EmailValidators {
   }
 }
 
-export class Phonevalidators{
-  static validNumber(control: FormControl) {
+export class PhoneValidators{
+  static invalidNumber(control: FormControl) {
     if (isNaN(control.value)) {
       return {invalidNumber: true};
     }

@@ -1,1 +1,46 @@
 <h1>Posts</h1>
+<div class="col-md-6">
+  <label for="selectUser">Filter</label>
+  <select class="form-control" id="selectUser" #u (change)="filterUsers(u.value)">
+    <option value="">Select a user...</option>
+    <option *ngFor="let user of users" value="{{user.id}}">
+      {{user.name}}
+    </option>
+  </select>
+  <h2 *ngIf="isLoading">Waiting for loading data...</h2>
+  <ul class="list-group">
+    <li
+      *ngFor="let post of posts"
+      class="list-group-item"
+      (click)="currentPost = post; getComments()"
+      [class.active]="currentPost == post">
+      {{post.title}}
+    </li>
+  </ul>
+</div>
+<div class="col-md-6" *ngIf="currentPost">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        {{currentPost['title']}}
+      </h3>
+    </div>
+    <div class="panel-body">
+      {{currentPost['body']}}
+      <div *ngFor="let comment of postComments">
+        <hr>
+        <div class="media">
+          <div class="media-left">
+            <a href="#">
+              <img style="border-radius: 100px" class="media-object" src="http://lorempixel.com/80/80/people/?random={{comment['id']}}" alt="...">
+            </a>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">{{comment['title']}}</h4>
+            {{comment['body']}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
